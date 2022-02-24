@@ -22,3 +22,5 @@ cd counties
 gzip -d -r -S .pbf *
 find . -type f -exec mv '{}' '{}'.pbf \;
 ```
+
+Now you should have a vector tile directory that you can host yourself. So how can you use these in a web map?
