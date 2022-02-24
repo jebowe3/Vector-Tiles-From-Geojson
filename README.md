@@ -1,5 +1,5 @@
 # Vector-Tiles-From-Geojson
-The following is a step-by-step process for creating pbf vector tiles from geojson files using [tippecanoe](https://github.com/mapbox/tippecanoe) and mbutil[https://github.com/mapbox/mbutil].
+The following is a step-by-step process for creating pbf vector tiles from geojson files using [tippecanoe](https://github.com/mapbox/tippecanoe) and [mbutil](https://github.com/mapbox/mbutil).
 
 First, tippecanoe is not supported on Windows, so you will need a unix environment like MacOS or Linux.
 
