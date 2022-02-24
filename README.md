@@ -24,3 +24,5 @@ find . -type f -exec mv '{}' '{}'.pbf \;
 ```
 
 Now you should have a vector tile directory that you can host yourself. So how can you use these in a web map?
+
+A demo can be seen [here](https://jebowe3.github.io/Vector-Tiles-From-Geojson/vector-tiles-map/).
