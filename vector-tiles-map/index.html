@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>MapBox GL JS Offline Example</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<!--
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.10.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.10.0/mapbox-gl.css' rel='stylesheet' />
+-->
+    <script src='mapbox-gl.js'></script>
+    <link href='mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+// mapboxgl.accessToken = 'pk.your-own-code-here-for-online-maps';
+mapboxgl.accessToken = 'NOT-REQUIRED-WITH-YOUR-VECTOR-TILES-DATA';
+
+var style = {
+  "version": 8,
+  "sources": {
+    "composite": {
+      "type": "vector",
+      // "url": "mapbox://map-id"
+      // "url": "http://tileserver.com/layer.json",
+      "tiles": [location.origin+location.pathname+"counties/{z}/{x}/{y}.pbf"],
+      //"minzoom": 0,
+      //"maxzoom": 10
+    }
+  },
+  "glyphs": location.origin+location.pathname+"font/{fontstack}/{range}.pbf",
+  "layers": [
+/*
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#d2b48c"
+      }
+    },
+*/
+    {
+        "id": "tl-2010-17-county10",
+        "type": "fill",
+        "source": "composite",
+        "source-layer": "tl_2010_17_county10",
+        "layout": {},
+        "paint": {
+            "fill-color": "hsl(137, 44%, 45%)",
+            "fill-opacity": 0.65,
+            "fill-outline-color": "#000000"
+        }
+    },
+    {
+        "id": "tl-2010-18-county10",
+        "type": "fill",
+        "source": "composite",
+        "source-layer": "tl_2010_18_county10",
+        "layout": {},
+        "paint": {
+            "fill-color": "hsl(0, 85%, 69%)",
+            "fill-outline-color": "#000000",
+            "fill-opacity": 0.65
+        }
+    }
+  ]
+};
+
+var map = new mapboxgl.Map({
+  container: 'map',
+  center: [-87.842, 39.8],
+  zoom: 6,
+  style: style
+});
+
+map.addControl(new mapboxgl.Navigation());
+</script>
+
+</body>
+</html>
