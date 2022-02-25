@@ -3,7 +3,7 @@
 
 <head>
   <meta charset='utf-8' />
-  <title>MapBox GL JS Offline Example</title>
+  <title>MapBox GL JS Self-Served Vector Tiles</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='mapbox-gl.js'></script>
   <link href='mapbox-gl.css' rel='stylesheet' />
@@ -28,7 +28,7 @@
   <script>
     mapboxgl.accessToken = 'NOT-REQUIRED-WITH-YOUR-VECTOR-TILES-DATA';
 
-    var style = {
+    const style = {
       "version": 8,
       "name": "OSM Liberty",
       "metadata": {
@@ -277,12 +277,15 @@
       ]
     };
 
-    var map = new mapboxgl.Map({
+    const map = new mapboxgl.Map({
       container: 'map',
       center: [-87.842, 39.8],
       zoom: 6,
       style: style
     });
+
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl());
 
     // create a popup without adding to map
     let popup = new mapboxgl.Popup({
@@ -290,43 +293,47 @@
       closeOnClick: false
     });
 
+    // when the map loads, call a function
     map.on('load', function() {
-
+      // when you move your mouse over the layer identified below, do something...
+      // the formula for this is 'map.on({event}, {layer id}, function(x){})'
       map.on('mousemove', "tl-2010-17-county10", function(e) {
 
-        // Change the cursor style as a UI indicator.
+        // change the cursor style as a UI indicator.
         map.getCanvas().style.cursor = 'pointer';
 
-        // Define the county names
+        // define the county names
+        // with "e.features[0].properties," you have access to all of the properties from the initial geojson layer
         let ILCountyNames = e.features[0].properties.NAMELSAD10 + ", Illinois";
 
         // get the popup defined above
         popup
-          .setLngLat(e.lngLat)
-          .setHTML(ILCountyNames)
-          .addTo(map)
+          .setLngLat(e.lngLat) // the location of the cursor
+          .setHTML(ILCountyNames) // feed the popup the county name and state
+          .addTo(map) // add the popup to the map
 
       });
-
+      // do the same thing for the other county layer
       map.on('mousemove', "tl-2010-18-county10", function(e) {
 
-        // Change the cursor style as a UI indicator.
+        // change the cursor style as a UI indicator.
         map.getCanvas().style.cursor = 'pointer';
 
-        // Define the county names
+        // define the county names
+        // with "e.features[0].properties," you have access to all of the properties from the initial geojson layer
         let INCountyNames = e.features[0].properties.NAMELSAD10 + ", Indiana";
 
         // get the popup defined above
         popup
-          .setLngLat(e.lngLat)
-          .setHTML(INCountyNames)
-          .addTo(map)
+          .setLngLat(e.lngLat) // the location of the cursor
+          .setHTML(INCountyNames) // feed the popup the county name and state
+          .addTo(map) // add the popup to the map
 
       });
 
       // when the mouse leaves the vector...
       map.on('mouseleave', 'tl-2010-17-county10', function(e) {
-        // change the cursor style back to a pointer
+        // change the cursor style back to initial setting
         map.getCanvas().style.cursor = '';
         // and remove the popup
         popup.remove();
@@ -334,16 +341,13 @@
 
       // when the mouse leaves the vector...
       map.on('mouseleave', 'tl-2010-18-county10', function(e) {
-        // change the cursor style back to a pointer
+        // change the cursor style back to initial setting
         map.getCanvas().style.cursor = '';
         // and remove the popup
         popup.remove();
       });
 
     });
-
-    // Add zoom and rotation controls to the map.
-    map.addControl(new mapboxgl.NavigationControl());
   </script>
 
 </body>
