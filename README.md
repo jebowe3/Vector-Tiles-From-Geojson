@@ -1,5 +1,5 @@
 # Vector-Tiles-From-Geojson
-The following is a step-by-step process for creating pbf vector tiles from geojson files using [tippecanoe](https://github.com/mapbox/tippecanoe) and [mbutil](https://github.com/mapbox/mbutil).
+The following is a step-by-step process for creating pbf vector tiles you can serve all by yourself from geojson files using [tippecanoe](https://github.com/mapbox/tippecanoe) and [mbutil](https://github.com/mapbox/mbutil).
 
 First, tippecanoe is not supported on Windows, so you will need a unix environment like MacOS or Linux.
 
@@ -345,4 +345,4 @@ map.on('load', function() {
 </html>
 ```
 
-For the purposes of providing additional spatial context, I have included some vector basemap tiles from [maptiler](https://www.maptiler.com/) and customized in [maputnik](https://maputnik.github.io/). A demo can be seen [here](https://jebowe3.github.io/Vector-Tiles-From-Geojson/vector-tiles-map/).
+From the instructions above, you can see how multiple vector geojson files can be combined into one pbf tile set that you can style and serve yourself. For the purposes of providing additional spatial context, I have included some vector basemap tiles from [maptiler](https://www.maptiler.com/) and customized in [maputnik](https://maputnik.github.io/) in my html file. A demo can be seen [here](https://jebowe3.github.io/Vector-Tiles-From-Geojson/vector-tiles-map/).
